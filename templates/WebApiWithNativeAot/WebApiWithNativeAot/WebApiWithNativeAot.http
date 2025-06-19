@@ -1,0 +1,11 @@
+@WebApiWithNativeAot_HostAddress = http://localhost:5299
+
+GET {{WebApiWithNativeAot_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{WebApiWithNativeAot_HostAddress}}/todos/1
+Accept: application/json
+
+###

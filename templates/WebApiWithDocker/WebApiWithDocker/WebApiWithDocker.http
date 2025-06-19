@@ -1,0 +1,6 @@
+@WebApiWithDocker_HostAddress = http://localhost:5139
+
+GET {{WebApiWithDocker_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
