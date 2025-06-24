@@ -1,5 +1,12 @@
-var builder = WebApplication.CreateBuilder(args);
+using System.Text.Json.Serialization;
+
+var builder = WebApplication.CreateSlimBuilder(args);
+builder.Services.ConfigureHttpJsonOptions(options => {
+	options.SerializerOptions.TypeInfoResolverChain.Add(WeatherForecastSerializerContext.Default);
+});
+
 builder.Services.AddOpenApi();
+
 var app = builder.Build();
 if (app.Environment.IsDevelopment()) app.MapOpenApi();
 
@@ -20,3 +27,7 @@ app.Run();
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary) {
 	public int TemperatureF => 32 + (int) (TemperatureC / 0.5556);
 }
+
+[JsonSerializable(typeof(WeatherForecast))]
+[JsonSerializable(typeof(WeatherForecast[]))]
+internal partial class WeatherForecastSerializerContext : JsonSerializerContext { }
